@@ -58,4 +58,23 @@ export class PostsService {
 				message.error("Failed to get post, try again later");
 			});
 	}
+
+	public static deletePost(id: string) {
+		return fetch(API_ROUTES.deletePost.path(id), {
+			method: API_ROUTES.deletePost.method,
+		})
+			.then((res) => {
+				if (!res.ok) {
+					throw new Error("Failed to delete post, try again later");
+				} else {
+					return res.json() as Promise<Post>;
+				}
+			})
+			.then((res) => {
+				return res;
+			})
+			.catch(() => {
+				message.error("Failed to delete post, try again later");
+			});
+	}
 }

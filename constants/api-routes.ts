@@ -18,4 +18,8 @@ export const API_ROUTES = {
 		method: "GET",
 		path: (id: string) => `${API_URL}/posts/${id}.json`,
 	},
+	deletePost: {
+		method: "DELETE",
+		path: (id: string) => `${API_URL}/posts/${id}.json`,
+	},
 };

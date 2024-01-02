@@ -1,8 +1,9 @@
 "use client";
 
+import DeletePost from "@/components/DeletePost";
 import { ROUTES } from "@/constants/routes";
 import { useGetPostQuery } from "@/queries/posts";
-import { Spin } from "antd";
+import { Flex, Spin } from "antd";
 import { Empty } from "antd/lib";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -26,7 +27,10 @@ export default function PostDetails() {
 						<h1>{post.title}</h1>
 						<p>{post.content}</p>
 						<footer>
-							<Link href={ROUTES.editPost.path(id as string)}>Edit</Link>
+							<Flex gap={16} align="center">
+								<Link href={ROUTES.editPost.path(id as string)}>Edit</Link>
+								<DeletePost id={id as string} />
+							</Flex>
 						</footer>
 					</article>
 				</div>

@@ -1,6 +1,6 @@
 import { message } from "antd";
 import { API_ROUTES } from "@/constants/api-routes";
-import type { CreatePostResponse, PostFormData } from "./models/Post";
+import type { CreatePostResponse, Post, PostFormData } from "./models/Post";
 
 export class PostsService {
 	public static createPost(data: PostFormData) {
@@ -37,6 +37,25 @@ export class PostsService {
 			})
 			.catch(() => {
 				message.error("Failed edit the post, try again later");
+			});
+	}
+
+	public static getPost(id: string) {
+		return fetch(API_ROUTES.getPost.path(id), {
+			method: API_ROUTES.getPost.method,
+		})
+			.then((res) => {
+				if (!res.ok) {
+					throw new Error("Failed to get post, try again later");
+				} else {
+					return res.json() as Promise<Post>;
+				}
+			})
+			.then((res) => {
+				return res;
+			})
+			.catch(() => {
+				message.error("Failed to get post, try again later");
 			});
 	}
 }

@@ -14,4 +14,8 @@ export const API_ROUTES = {
 		method: "PUT",
 		path: (id: string) => `${API_URL}/posts/${id}.json`,
 	},
+	getPost: {
+		method: "GET",
+		path: (id: string) => `${API_URL}/posts/${id}.json`,
+	},
 };

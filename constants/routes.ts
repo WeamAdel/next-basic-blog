@@ -3,12 +3,12 @@ export const ROUTES = {
 		path: "/",
 	},
 	createPost: {
-		path: "/create-post",
+		path: "/create",
 	},
 	editPost: {
-		path: (id: string) => `/edit-post/${id}`,
+		path: (id: string) => `/post/${id}/edit`,
 	},
 	postDetails: {
-		path: (id: string) => `/posts/${id}`,
+		path: (id: string) => `/post/${id}`,
 	},
 };

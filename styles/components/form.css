@@ -1,0 +1,7 @@
+.form-control {
+  &.ant-input {
+    &[aria-invalid="true"] {
+      border-color: var(--red-500);
+    }
+  }
+}

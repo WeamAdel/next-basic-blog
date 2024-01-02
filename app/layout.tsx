@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import AntConfigProvider from "@/providers/AntConfigProvider";
+import QueryProvider from "@/providers/QueryProvider";
 import "@/styles/main.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,9 +18,11 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<AntConfigProvider>
-				<body className={inter.className}>{children}</body>
-			</AntConfigProvider>
+			<QueryProvider>
+				<AntConfigProvider>
+					<body className={inter.className}>{children}</body>
+				</AntConfigProvider>
+			</QueryProvider>
 		</html>
 	);
 }

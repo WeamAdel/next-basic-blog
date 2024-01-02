@@ -22,4 +22,21 @@ export class PostsService {
 				message.error("Failed to create post, try again later");
 			});
 	}
+
+	public static editPost(id: string, data: PostFormData) {
+		return fetch(API_ROUTES.editPost.path(id), {
+			method: API_ROUTES.editPost.method,
+			body: JSON.stringify(data),
+		})
+			.then((res) => {
+				if (!res.ok) {
+					throw new Error("Failed edit the post");
+				} else {
+					return res.json() as Promise<CreatePostResponse>;
+				}
+			})
+			.catch(() => {
+				message.error("Failed edit the post, try again later");
+			});
+	}
 }

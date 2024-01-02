@@ -10,4 +10,8 @@ export const API_ROUTES = {
 		method: "POST",
 		path: POSTS_ENDPOINT,
 	},
+	editPost: {
+		method: "PUT",
+		path: (id: string) => `${API_URL}/posts/${id}.json`,
+	},
 };

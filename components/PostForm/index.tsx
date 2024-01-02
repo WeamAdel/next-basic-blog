@@ -5,13 +5,18 @@ import TextArea from "antd/lib/input/TextArea";
 import type { PostFormData } from "@/services/models/Post";
 
 interface Props {
+	initialValues?: PostFormData;
 	isSubmitting: boolean;
 	onSubmit: (data: PostFormData) => void;
 }
 
-export default function PostForm({ isSubmitting, onSubmit }: Props) {
+export default function PostForm({
+	isSubmitting,
+	onSubmit,
+	initialValues,
+}: Props) {
 	return (
-		<Form name="create-post" onFinish={onSubmit}>
+		<Form initialValues={initialValues} name="create-post" onFinish={onSubmit}>
 			<Space className="w-100" direction="vertical" size={20}>
 				<Space className="w-100" direction="vertical" size={16}>
 					<Item
@@ -40,7 +45,7 @@ export default function PostForm({ isSubmitting, onSubmit }: Props) {
 				</Space>
 
 				<Button loading={isSubmitting} type="primary" htmlType="submit">
-					Create Post
+					{initialValues ? "Save Changes" : "Create Post"}
 				</Button>
 			</Space>
 		</Form>

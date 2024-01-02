@@ -1,7 +1,26 @@
+import Link from "next/link";
+import { Button, Flex } from "antd";
+import { ROUTES } from "@/constants/routes";
+import PostsList from "@/components/PostsList/index";
+
 export default function Home() {
 	return (
 		<main>
-			<h1>Posts</h1>
+			<div className="container">
+				<header>
+					<Flex align="center" justify="space-between" wrap="wrap" gap={16}>
+						<h1>Blog</h1>
+
+						<Link href={ROUTES.createPost.path}>
+							<Button type="primary" tabIndex={-1} role="presentation">
+								Create Post
+							</Button>
+						</Link>
+					</Flex>
+				</header>
+
+				<PostsList />
+			</div>
 		</main>
 	);
 }

@@ -2,19 +2,21 @@
 
 import React from "react";
 import { message } from "antd";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@/constants/routes";
 import { useMutation } from "react-query";
-import { queryClient } from "@/providers/QueryProvider";
 import { PostsService } from "@/services/PostsService";
 import PostForm from "@/components/PostForm";
 import type { PostFormData } from "@/services/models/Post";
 
 export default function CreatePost() {
+	const router = useRouter();
 	const { isLoading: isSubmitting, mutate: addPost } = useMutation({
 		mutationFn: (data: PostFormData) => {
 			return PostsService.createPost(data)
-				.then(() => {
+				.then((id) => {
 					message.success("The post was created successfully.");
-					queryClient.invalidateQueries({ queryKey: ["posts"] });
+					router.push(ROUTES.postDetails.path(id as string));
 				})
 				.catch((err) => {
 					message.error(err.message);

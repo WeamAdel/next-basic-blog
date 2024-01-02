@@ -15,6 +15,9 @@ export class PostsService {
 					return res.json() as Promise<CreatePostResponse>;
 				}
 			})
+			.then((res) => {
+				return res.name;
+			})
 			.catch(() => {
 				message.error("Failed to create post, try again later");
 			});

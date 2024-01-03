@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button, Flex } from "antd";
+import { Flex } from "antd";
 import { ROUTES } from "@/constants/routes";
 import PostsList from "@/components/PostsList/index";
 
@@ -11,11 +11,7 @@ export default function Home() {
 					<Flex align="center" justify="space-between" wrap="wrap" gap={16}>
 						<h1>Blog</h1>
 
-						<Link href={ROUTES.createPost.path}>
-							<Button type="primary" tabIndex={-1} role="presentation">
-								Create Post
-							</Button>
-						</Link>
+						<Link href={ROUTES.createPost.path}>Create Post</Link>
 					</Flex>
 				</header>
 

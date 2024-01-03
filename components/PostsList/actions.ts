@@ -2,7 +2,7 @@
 
 import { API_ROUTES } from "@/constants/api-routes";
 import { flattenData } from "@/utils/formatters";
-import type { PostsResponse } from "@/models/Post";
+import type { Post, PostsResponse } from "@/models/Post";
 
 export async function getPosts() {
 	return fetch(API_ROUTES.getPosts.path, {
@@ -21,7 +21,7 @@ export async function getPosts() {
 		})
 		.then((res) => {
 			if (res) {
-				const posts = flattenData(res);
+				const posts = flattenData(res) as Post[];
 
 				return { posts, error: null };
 			}

@@ -1,6 +1,10 @@
-import { message } from "antd";
 import { API_ROUTES } from "@/constants/api-routes";
-import type { CreatePostResponse, Post, PostFormData } from "./models/Post";
+import type {
+	CreatePostResponse,
+	Post,
+	PostFormData,
+	PostsResponse,
+} from "./models/Post";
 
 export class PostsService {
 	public static createPost(data: PostFormData) {
@@ -10,7 +14,7 @@ export class PostsService {
 		})
 			.then((res) => {
 				if (!res.ok) {
-					throw new Error("Failed to create post");
+					throw new Error("Failed to create post, try again later");
 				} else {
 					return res.json() as Promise<CreatePostResponse>;
 				}
@@ -19,7 +23,7 @@ export class PostsService {
 				return res.name;
 			})
 			.catch(() => {
-				message.error("Failed to create post, try again later");
+				throw new Error("Failed to create post, try again later");
 			});
 	}
 
@@ -30,13 +34,13 @@ export class PostsService {
 		})
 			.then((res) => {
 				if (!res.ok) {
-					throw new Error("Failed edit the post");
+					throw new Error("Failed edit the post, try again later");
 				} else {
 					return res.json() as Promise<CreatePostResponse>;
 				}
 			})
 			.catch(() => {
-				message.error("Failed edit the post, try again later");
+				throw new Error("Failed edit the post, try again later");
 			});
 	}
 
@@ -55,7 +59,7 @@ export class PostsService {
 				return res;
 			})
 			.catch(() => {
-				message.error("Failed to get post, try again later");
+				throw new Error("Failed to get post, try again later");
 			});
 	}
 
@@ -74,7 +78,40 @@ export class PostsService {
 				return res;
 			})
 			.catch(() => {
-				message.error("Failed to delete post, try again later");
+				throw new Error("Failed to delete post, try again later");
+			});
+	}
+
+	public static getPosts() {
+		return fetch(API_ROUTES.getPosts.path, {
+			method: API_ROUTES.getPosts.method,
+			next: {
+				revalidate: 1,
+			},
+		})
+			.then((res) => {
+				if (res.ok) {
+					return res.json() as Promise<PostsResponse>;
+				}
+
+				throw new Error("Failed to get posts, try again later");
+			})
+			.then((res) => {
+				if (res) {
+					const posts = Object.entries(res).map(([id, post]) => {
+						return {
+							id,
+							...post,
+						};
+					});
+
+					return { posts, error: null };
+				}
+
+				return { posts: [], error: null };
+			})
+			.catch(() => {
+				return { posts: [], error: "Failed to get posts, try again later" };
 			});
 	}
 }

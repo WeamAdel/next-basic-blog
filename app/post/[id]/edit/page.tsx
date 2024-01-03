@@ -4,13 +4,13 @@ import React from "react";
 import { Spin, message, Empty } from "antd";
 import { useParams } from "next/navigation";
 import { useMutation } from "react-query";
-import { PostsService } from "@/services/PostsService";
 import PostForm from "@/components/PostForm";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
 import { useGetPostQuery } from "@/queries/posts";
 import { queryClient } from "@/providers/QueryProvider";
-import type { PostFormData } from "@/services/models/Post";
+import { editPost } from "./actions";
+import type { PostFormData } from "@/models/Post";
 
 export default function EditPost() {
 	const { id } = useParams();
@@ -21,7 +21,7 @@ export default function EditPost() {
 
 	const { isLoading: isSubmitting, mutate: addPost } = useMutation({
 		mutationFn: (data: PostFormData) => {
-			return PostsService.editPost(id as string, data)
+			return editPost(id as string, data)
 				.then(() => {
 					router.push(ROUTES.postDetails.path(id as string));
 					message.success("The post was edited successfully.");

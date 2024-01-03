@@ -1,12 +1,12 @@
 "use client";
 
+import React, { useState } from "react";
 import { ROUTES } from "@/constants/routes";
 import { queryClient } from "@/providers/QueryProvider";
-import { PostsService } from "@/services/PostsService";
 import { Button, Modal, message } from "antd";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
 import { useMutation } from "react-query";
+import { deletePost } from "./actions";
 
 interface Props {
 	id: string;
@@ -15,12 +15,12 @@ interface Props {
 export default function DeletePost({ id }: Props) {
 	const [isOpen, setIsOpen] = useState(false);
 	const router = useRouter();
-	const { isLoading: isDeleting, mutate: deletePost } = useMutation({
+	const { isLoading: isDeleting, mutate: deletePostMutation } = useMutation({
 		mutationFn: handleDelete,
 	});
 
 	async function handleDelete() {
-		return PostsService.deletePost(id)
+		return deletePost(id)
 			.then(() => {
 				queryClient.invalidateQueries({ queryKey: ["post", id] });
 				message.success("Post deleted successfully");
@@ -55,7 +55,7 @@ export default function DeletePost({ id }: Props) {
 				cancelButtonProps={{
 					type: "default",
 				}}
-				onOk={() => deletePost()}
+				onOk={() => deletePostMutation()}
 				onCancel={() => setIsOpen(false)}
 			>
 				<h2>Are you sure you want to delete this post?</h2>

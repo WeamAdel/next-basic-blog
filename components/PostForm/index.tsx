@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Form, Input, Space } from "antd";
 import Item from "antd/lib/form/FormItem";
 import TextArea from "antd/lib/input/TextArea";
-import type { PostFormData } from "@/services/models/Post";
+import type { PostFormData } from "@/models/Post";
 
 interface Props {
 	initialValues?: PostFormData;
@@ -28,7 +28,12 @@ export default function PostForm({
 							},
 						]}
 					>
-						<Input className="form-control" placeholder="Title" />
+						<Input
+							maxLength={100}
+							className="form-control"
+							placeholder="Title"
+							count={{ max: 100, show: true }}
+						/>
 					</Item>
 
 					<Item
@@ -40,7 +45,11 @@ export default function PostForm({
 							},
 						]}
 					>
-						<TextArea placeholder="Content" />
+						<TextArea
+							maxLength={1000}
+							count={{ max: 1000, show: true }}
+							placeholder="Content"
+						/>
 					</Item>
 				</Space>
 

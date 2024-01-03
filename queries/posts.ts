@@ -1,7 +1,7 @@
 import { message } from "antd";
-import { PostsService } from "@/services/PostsService";
 import { useQuery, type UseQueryResult } from "react-query";
-import type { Post } from "@/services/models/Post";
+import { getPost } from "@/app/post/[id]/actions";
+import type { Post } from "@/models/Post";
 import type { QueryOptions } from "@/types/query";
 
 export function useGetPostQuery(
@@ -11,7 +11,7 @@ export function useGetPostQuery(
 	return useQuery(
 		["post", id],
 		() => {
-			return PostsService.getPost(id)
+			return getPost(id)
 				.then((res) => res)
 				.catch((err) => {
 					message.error(err.message);

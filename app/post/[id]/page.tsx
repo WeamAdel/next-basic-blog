@@ -3,7 +3,8 @@ import { Flex } from "antd";
 import Link from "next/link";
 import { Empty } from "antd/lib";
 import { ROUTES } from "@/constants/routes";
-import { PostsService } from "@/services/PostsService";
+import { getPost } from "./actions";
+import { getPosts } from "@/components/PostsList/actions";
 import DeletePost from "@/components/DeletePost";
 
 interface Props {
@@ -13,7 +14,7 @@ interface Props {
 }
 
 export default async function PostDetails({ params: { id } }: Props) {
-	const { post, error } = await PostsService.getPost(id);
+	const { post, error } = await getPost(id);
 
 	if (post) {
 		return (
@@ -50,7 +51,7 @@ export default async function PostDetails({ params: { id } }: Props) {
 }
 
 export async function generateStaticParams() {
-	const { posts } = await PostsService.getPosts();
+	const { posts } = await getPosts();
 
 	return posts?.map((post) => ({
 		id: post.id,

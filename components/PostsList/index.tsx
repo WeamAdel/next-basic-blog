@@ -1,11 +1,11 @@
 import React from "react";
 import { Empty } from "antd/lib";
-import { PostsService } from "@/services/PostsService";
 import PostCard from "@/components/PostCard";
 import styles from "./styles.module.css";
+import { getPosts } from "./actions";
 
 export default async function PostsList() {
-	const { posts, error } = await PostsService.getPosts();
+	const { posts, error } = await getPosts();
 
 	if (error) {
 		return <Empty description={error} />;

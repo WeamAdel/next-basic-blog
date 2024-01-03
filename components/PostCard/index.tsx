@@ -10,8 +10,12 @@ interface Props {
 export default function PostCard({ post }: Props) {
 	return (
 		<article className={styles.card}>
-			<h3 className="text-truncate">{post.title}</h3>
-			<Link href={ROUTES.postDetails.path(post.id)}>View details</Link>
+			<h3 data-testid="post-title" className="text-truncate">
+				{post.title}
+			</h3>
+			<Link data-testid="post-link" href={ROUTES.postDetails.path(post.id)}>
+				View details
+			</Link>
 		</article>
 	);
 }

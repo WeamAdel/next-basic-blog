@@ -39,6 +39,7 @@ export default function PostForm({
 							className="form-control"
 							placeholder="Title"
 							count={{ max: 100, show: true }}
+							data-testid="title-input"
 						/>
 					</Item>
 
@@ -56,6 +57,7 @@ export default function PostForm({
 							maxLength={1000}
 							count={{ max: 1000, show: true }}
 							placeholder="Content"
+							data-testid="content-input"
 						/>
 					</Item>
 				</Space>

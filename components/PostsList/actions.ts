@@ -7,7 +7,7 @@ export async function getPosts() {
 	return fetch(API_ROUTES.getPosts.path, {
 		method: API_ROUTES.getPosts.method,
 		next: {
-			revalidate: 1,
+			revalidate: 60,
 			tags: ["posts"],
 		},
 	})

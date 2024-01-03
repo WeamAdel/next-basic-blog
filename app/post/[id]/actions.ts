@@ -7,7 +7,7 @@ export async function getPost(id: string) {
 	return fetch(API_ROUTES.getPost.path(id), {
 		method: API_ROUTES.getPost.method,
 		next: {
-			revalidate: 1,
+			revalidate: 60,
 			tags: [id],
 		},
 	})

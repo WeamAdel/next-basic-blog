@@ -61,6 +61,8 @@ export default function DeletePost({ id }: Props) {
 				}}
 				onOk={() => deletePostMutation()}
 				onCancel={() => setIsOpen(false)}
+				centered
+				destroyOnClose
 			>
 				<h2>Are you sure you want to delete this post?</h2>
 				<p>This action is irreversible.</p>

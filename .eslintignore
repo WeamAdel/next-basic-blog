@@ -1,0 +1,9 @@
+# Ignore
+
+build/
+node_modules/
+*.config
+
+coverage/
+*.test.js
+*.test.ts

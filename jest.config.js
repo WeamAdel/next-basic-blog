@@ -8,6 +8,9 @@ module.exports = {
 		"^.+\\.(css|less|scss|sass)$": "identity-obj-proxy",
 	},
 	transform: {
-		"^.+\\.[jt]sx?$": "babel-jest",
+		"^.+\\.[jt]sx?$": [
+			"babel-jest",
+			{ configFile: "./babel.config.testing.json" },
+		],
 	},
 };

@@ -62,7 +62,12 @@ export default function PostForm({
 					</Item>
 				</Space>
 
-				<Button loading={isSubmitting} type="primary" htmlType="submit">
+				<Button
+					loading={isSubmitting}
+					type="primary"
+					htmlType="submit"
+					data-testid="post-submit-btn"
+				>
 					{initialValues ? "Save Changes" : "Create Post"}
 				</Button>
 			</Space>

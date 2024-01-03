@@ -20,7 +20,7 @@ export default async function PostDetails({ params: { id } }: Props) {
 			<main>
 				<div className="container">
 					<article>
-						<h1>{post.title}</h1>
+						<h1 className="text-truncate">{post.title}</h1>
 						<p>{post.content}</p>
 						<footer>
 							<Flex gap={16} align="center">

@@ -39,21 +39,25 @@ export default function DeletePost({ id }: Props) {
 				onClick={() => setIsOpen(true)}
 				title="Delete Post"
 				danger
+				data-testid="delete-post-btn"
 			>
 				Delete
 			</Button>
 
 			<Modal
+				data-testid="delete-post-modal"
 				open={isOpen}
 				okButtonProps={{
-					danger: true,
-					type: "primary",
-					loading: isDeleting,
+					"danger": true,
+					"type": "primary",
+					"loading": isDeleting,
+					"data-testid": "delete-post-confirm-btn",
 				}}
 				okText="Confirm"
 				cancelText="No, cancel"
 				cancelButtonProps={{
-					type: "default",
+					"type": "default",
+					"data-testid": "delete-post-cancel-btn",
 				}}
 				onOk={() => deletePostMutation()}
 				onCancel={() => setIsOpen(false)}

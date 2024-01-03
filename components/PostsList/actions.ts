@@ -1,6 +1,7 @@
 "use server";
 
 import { API_ROUTES } from "@/constants/api-routes";
+import { flattenData } from "@/utils/formatters";
 import type { PostsResponse } from "@/models/Post";
 
 export async function getPosts() {
@@ -20,12 +21,7 @@ export async function getPosts() {
 		})
 		.then((res) => {
 			if (res) {
-				const posts = Object.entries(res).map(([id, post]) => {
-					return {
-						id,
-						...post,
-					};
-				});
+				const posts = flattenData(res);
 
 				return { posts, error: null };
 			}

@@ -56,10 +56,10 @@ export class PostsService {
 				}
 			})
 			.then((res) => {
-				return res;
+				return { post: res, error: null };
 			})
 			.catch(() => {
-				throw new Error("Failed to get post, try again later");
+				return { post: null, error: "Failed to get post, try again later" };
 			});
 	}
 

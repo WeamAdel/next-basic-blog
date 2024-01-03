@@ -1,23 +1,19 @@
-"use client";
-
-import DeletePost from "@/components/DeletePost";
-import { ROUTES } from "@/constants/routes";
-import { useGetPostQuery } from "@/queries/posts";
-import { Flex, Spin } from "antd";
-import { Empty } from "antd/lib";
-import Link from "next/link";
-import { useParams } from "next/navigation";
 import React from "react";
+import { Flex } from "antd";
+import Link from "next/link";
+import { Empty } from "antd/lib";
+import { ROUTES } from "@/constants/routes";
+import { PostsService } from "@/services/PostsService";
+import DeletePost from "@/components/DeletePost";
 
-export default function PostDetails() {
-	const { id } = useParams();
-	const {
-		data: post,
-		error,
-		isLoading,
-	} = useGetPostQuery(id as string, {
-		enabled: Boolean(id),
-	});
+interface Props {
+	params: {
+		id: string;
+	};
+}
+
+export default async function PostDetails({ params: { id } }: Props) {
+	const { post, error } = await PostsService.getPost(id);
 
 	if (post) {
 		return (
@@ -45,12 +41,18 @@ export default function PostDetails() {
 
 				{error ? (
 					<Empty description="Failed to load the post data" />
-				) : isLoading ? (
-					<Spin />
 				) : (
 					<Empty description="Not found" />
 				)}
 			</div>
 		</main>
 	);
+}
+
+export async function generateStaticParams() {
+	const { posts } = await PostsService.getPosts();
+
+	return posts?.map((post) => ({
+		id: post.id,
+	}));
 }

@@ -39,7 +39,7 @@ export default function EditPost() {
 		<PostForm
 			isSubmitting={isSubmitting}
 			onSubmit={addPost}
-			initialValues={data}
+			initialValues={data?.post}
 		/>
 	) : (
 		<Empty description="Not found" />
@@ -48,7 +48,7 @@ export default function EditPost() {
 	return (
 		<main>
 			<div className="container">
-				<h1>Edit {data?.title ? data.title : "Post"}</h1>
+				<h1>Edit {data?.post ? data.post.title : "Post"}</h1>
 				{isLoading ? <Spin /> : contentJSX}
 			</div>
 		</main>

@@ -7,7 +7,7 @@ import type { QueryOptions } from "@/types/query";
 export function useGetPostQuery(
 	id: string,
 	options?: QueryOptions,
-): UseQueryResult<Post> {
+): UseQueryResult<{ post: Post; error: string }> {
 	return useQuery(
 		["post", id],
 		() => {

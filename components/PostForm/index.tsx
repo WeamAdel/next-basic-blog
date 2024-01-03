@@ -16,10 +16,16 @@ export default function PostForm({
 	initialValues,
 }: Props) {
 	return (
-		<Form initialValues={initialValues} name="create-post" onFinish={onSubmit}>
+		<Form
+			layout="vertical"
+			initialValues={initialValues}
+			name="create-post"
+			onFinish={onSubmit}
+		>
 			<Space className="w-100" direction="vertical" size={20}>
 				<Space className="w-100" direction="vertical" size={16}>
 					<Item
+						label="Title"
 						name="title"
 						rules={[
 							{
@@ -37,6 +43,7 @@ export default function PostForm({
 					</Item>
 
 					<Item
+						label="Content"
 						name="content"
 						rules={[
 							{
